@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasy Premier League - Login & Signup</title>
+
+    <style>
+        :root {
+            --primary: #37003c;
+            --secondary: #00ff87;
+            --light: #ffffff;
+            --dark: #242424;
+            --gray: #f0f0f0;
+            --border: #e0e0e0;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--gray);
+            color: var(--dark);
+        }
+        .container {
+            max-width: 400px;
+            margin: 100px auto;
+            background: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--light);
+        }
+        .btn-primary:hover {
+            background-color: #29002e;
+        }
+        .toggle-link {
+            margin-top: 15px;
+            display: block;
+            color: var(--primary);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <h2>Login</h2>
+        <input type="email" id="login-email" placeholder="Email" required>
+        <input type="password" id="login-password" placeholder="Password" required>
+        <button class="btn btn-primary" onclick="login()">Login</button>
+        <span class="toggle-link" onclick="toggleForms()">Don't have an account? Sign up</span>
+    </div>
+
+    <div class="container" id="signup-container" style="display: none;">
+        <h2>Sign Up</h2>
+        <input type="text" id="signup-name" placeholder="Full Name" required>
+        <input type="email" id="signup-email" placeholder="Email" required>
+        <input type="password" id="signup-password" placeholder="Password" required>
+        <button class="btn btn-primary" onclick="signup()">Sign Up</button>
+        <span class="toggle-link" onclick="toggleForms()">Already have an account? Login</span>
+    </div>
+
+    <!-- ✅ Firebase Auth (Use Type=Module for Import Statements) -->
+    <script type="module">
+        // 🔥 Import Firebase SDK
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+        // ✅ Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB96ev-OgmcaFQqi8KPWOCPzIQevCx7KRY",
+            authDomain: "fantasy-league-31c45.firebaseapp.com",
+            projectId: "fantasy-league-31c45",
+            storageBucket: "fantasy-league-31c45.appspot.com",
+            messagingSenderId: "490090007262",
+            appId: "1:490090007262:web:bb8076d6c8f32b364f504f",
+            measurementId: "G-QP1EJ07V7M"
+        };
+
+        // ✅ Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app); // ✅ Use Modular Firebase Auth
+
+        // 🔄 Toggle Between Login & Signup Forms
+        window.toggleForms = function () {
+            document.getElementById('login-container').style.display =
+                document.getElementById('login-container').style.display === 'none' ? 'block' : 'none';
+            document.getElementById('signup-container').style.display =
+                document.getElementById('signup-container').style.display === 'none' ? 'block' : 'none';
+        };
+
+        // 🔥 Signup Function
+        window.signup = function () {
+    const name = document.getElementById('signup-name').value.trim();
+    const email = document.getElementById('signup-email').value.trim();
+    const password = document.getElementById('signup-password').value;
+
+    // ✅ Check if email is empty
+    if (!email) {
+        alert("Please enter an email address.");
+        return;
+    }
+
+    // ✅ Validate Email Format
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(email)) {
+        alert("Invalid email format. Please enter a valid email.");
+        return;
+    }
+
+    // ✅ Ensure the password is at least 6 characters
+    if (password.length < 6) {
+        alert("Password must be at least 6 characters long.");
+        return;
+    }
+
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            let user = userCredential.user;
+            alert('Signup successful! Welcome ' + user.email);
+
+            // ✅ Update user profile with name
+            return updateProfile(user, { displayName: name });
+        })
+        .then(() => {
+            console.log('User profile updated successfully');
+        })
+        .catch(error => {
+            alert("Error: " + error.message);
+        });
+};
+
+
+        // 🔥 Login Function
+        window.login = function () {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert('Login successful! Welcome back ' + userCredential.user.email);
+                })
+                .catch(error => {
+                    alert(error.message);
+                });
+        };
+    </script>
+</body>
+</html>
