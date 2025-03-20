@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasy Premier League - Player Statistics</title>
+    <style>
+        
+    </style>
+    <link rel="stylesheet" href="statistics.css"/>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="https://i.pinimg.com/736x/f6/dd/2a/f6dd2a2c6db9977edaa3b43c355438fc.jpg" alt="Fantasy Premier League Logo" class="logo">
+            <h1>Player Statistics Dashboard</h1>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="filters">
+            <div class="filter-row">
+                <div class="filter-item">
+                    <label for="search">Search Player</label>
+                    <input type="text" id="search" placeholder="Player name...">
+                </div>
+                <div class="filter-item">
+                    <label for="team">Team</label>
+                    <select id="team">
+                        <option value="">All Teams</option>
+                        <option value="ARS">Arsenal</option>
+                        <option value="AVL">Aston Villa</option>
+                        <option value="BOU">Bournemouth</option>
+                        <option value="BRE">Brentford</option>
+                        <option value="BHA">Brighton</option>
+                        <option value="CHE">Chelsea</option>
+                        <option value="CRY">Crystal Palace</option>
+                        <option value="EVE">Everton</option>
+                        <option value="FUL">Fulham</option>
+                        <option value="LIV">Liverpool</option>
+                        <option value="MCI">Manchester City</option>
+                        <option value="MUN">Manchester United</option>
+                        <option value="NEW">Newcastle</option>
+                        <option value="NFO">Nottingham Forest</option>
+                        <option value="SOU">Southampton</option>
+                        <option value="TOT">Tottenham</option>
+                        <option value="WHU">West Ham</option>
+                        <option value="WOL">Wolves</option>
+                        <option value="LEI">Leicester</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label for="position">Position</label>
+                    <select id="position">
+                        <option value="">All Positions</option>
+                        <option value="GK">Goalkeeper</option>
+                        <option value="DEF">Defender</option>
+                        <option value="MID">Midfielder</option>
+                        <option value="FWD">Forward</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-item">
+                    <label for="price">Max Price</label>
+                    <input type="range" id="price" min="40" max="150" value="150" 
+                           oninput="document.getElementById('priceValue').textContent = (this.value/10).toFixed(1)">
+                    <span id="priceValue">15.0</span>m
+                </div>
+                <div class="filter-item">
+                    <label for="sort">Sort By</label>
+                    <select id="sort">
+                        <option value="points">Total Points</option>
+                        <option value="form">Form</option>
+                        <option value="price">Price</option>
+                        <option value="selected">Selection %</option>
+                        <option value="minutes">Minutes Played</option>
+                        <option value="goals">Goals</option>
+                        <option value="assists">Assists</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label>&nbsp;</label>
+                    <button id="apply-filters">Apply Filters</button>
+                </div>
+            </div>
+        </div>
+        
+        <table class="stats-table">
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Pos</th>
+                    <th>Team</th>
+                    <th>Price</th>
+                    <th>Pts</th>
+                    <th>Form</th>
+                    <th>Mins</th>
+                    <th>G</th>
+                    <th>A</th>
+                    <th>CS</th>
+                    <th>GC</th>
+                    <th>YC</th>
+                    <th>RC</th>
+                    <th>Sel%</th>
+                </tr>
+            </thead>
+            <tbody id="player-data">
+                <!-- Content will be loaded via JavaScript -->
+            </tbody>
+        </table>
+        
+        <div class="pagination" id="pagination">
+            <!-- Pagination buttons will be created via JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Data for all players across multiple pages
+        const allPlayersData = [
+            // Page 1
+            [
+                {
+                    name: "Haaland, Erling",
+                    position: "FWD",
+                    team: "MCI",
+                    price: "£14.5m",
+                    points: 215,
+                    form: 8.5,
+                    minutes: 2340,
+                    goals: 22,
+                    assists: 4,
+                    cleanSheets: "-",
+                    goalsConceded: "-",
+                    yellowCards: 3,
+                    redCards: 0,
+                    selected: "68.2%",
+                    highlight: true
+                },
+                {
+                    name: "Salah, Mohamed",
+                    position: "MID",
+                    team: "LIV",
+                    price: "£13.2m",
+                    points: 195,
+                    form: 7.6,
+                    minutes: 2156,
+                    goals: 16,
+                    assists: 7,
+                    cleanSheets: 9,
+                    goalsConceded: "-",
+                    yellowCards: 1,
+                    redCards: 0,
+                    selected: "52.7%"
+                },
+                {
+                    name: "Saka, Bukayo",
+                    position: "MID",
+                    team: "ARS",
+                    price: "£9.8m",
+                    points: 185,
+                    form: 7.9,
+                    minutes: 2215,
+                    goals: 14,
+                    assists: 8,
+                    cleanSheets: 10,
+                    goalsConceded: "-",
+                    yellowCards: 2,
+                    redCards: 0,
+                    selected: "45.3%"
+                },
+                {
+                    name: "Palmer, Cole",
+                    position: "MID",
+                    team: "CHE",
+                    price: "£8.4m",
+                    points: 182,
+                    form: 7.8,
+                    minutes: 2245,
+                    goals: 13,
+                    assists: 10,
+                    cleanSheets: 7,
+                    goalsConceded: "-",
+                    yellowCards: 4,
+                    redCards: 0,
+                    selected: "42.1%"
+                },
+                {
+                    name: "Son, Heung-Min",
+                    position: "MID",
+                    team: "TOT",
+                    price: "£10.5m",
+                    points: 178,
+                    form: 7.2,
+                    minutes: 2285,
+                    goals: 12,
+                    assists: 9,
+                    cleanSheets: 8,
+                    goalsConceded: "-",
+                    yellowCards: 1,
+                    redCards: 0,
+                    selected: "38.4%"
+                },
+                {
+                    name: "Alexander-Arnold, Trent",
+                    position: "DEF",
+                    team: "LIV",
+                    price: "£8.5m",
+                    points: 172,
+                    form: 7.1,
+                    minutes: 2105,
+                    goals: 3,
+                    assists: 10,
+                    cleanSheets: 12,
+                    goalsConceded: 25,
+                    yellowCards: 4,
+                    redCards: 0,
+                    selected: "34.9%"
+                },
+                {
+                    name: "De Bruyne, Kevin",
+                    position: "MID",
+                    team: "MCI",
+                    price: "£10.8m",
+                    points: 165,
+                    form: 6.8,
+                    minutes: 1875,
+                    goals: 8,
+                    assists: 14,
+                    cleanSheets: 7,
+                    goalsConceded: "-",
+                    yellowCards: 2,
+                    redCards: 0,
+                    selected: "29.8%"
+                },
+                {
+                    name: "Isak, Alexander",
+                    position: "FWD",
+                    team: "NEW",
+                    price: "£8.9m",
+                    points: 152,
+                    form: 6.4,
+                    minutes: 1985,
+                    goals: 15,
+                    assists: 2,
+                    cleanSheets: "-",
+                    goalsConceded: "-",
+                    yellowCards: 2,
+                    redCards: 0,
+                    selected: "22.8%"
+                },
+                {
+                    name: "Martinelli, Gabriel",
+                    position: "MID",
+                    team: "ARS",
+                    price: "£7.9m",
+                    points: 145,
+                    form: 6.2,
+                    minutes: 2010,
+                    goals: 10,
+                    assists: 5,
+                    cleanSheets: 9,
+                    goalsConceded: "-",
+                    yellowCards: 3,
+                    redCards: 0,
+                    selected: "18.7%"
+                },
+                {
+                    name: "Ederson",
+                    position: "GK",
+                    team: "MCI",
+                    price: "£5.5m",
+                    points: 135,
+                    form: 5.5,
+                    minutes: 2070,
+                    goals: 0,
+                    assists: 0,
+                    cleanSheets: 14,
+                    goalsConceded: 22,
+                    yellowCards: 1,
+                    redCards: 0,
+                    selected: "15.3%"
+                }
+            ],
+            // Page 2
+            [
+                {
+                    name: "Odegaard, Martin",
+                    position: "MID",
+                    team: "ARS",
+                    price: "£8.6m",
+                    points: 168,
+                    form: 7.0,
+                    minutes: 2185,
+                    goals: 9,
+                    assists: 8,
+                    cleanSheets: 11,
+                    goalsConceded: "-",
+                    yellowCards: 2,
+                    redCards: 0,
+                    selected: "24.9%"
+                },
+                {
+                    name: "Alisson",
+                    position: "GK",
+                    team: "LIV",
+                    price: "£5.8m",
+                    points: 142,
+                    form: 6.1,
+                    minutes: 2340,
+                    goals: 0,
+                    assists: 1,
+                    cleanSheets: 12,
+                    goalsConceded: 25,
+                    yellowCards: 0,
+                    redCards: 0,
+                    selected: "12.7%"
+                },
+                {
+                    name: "Foden, Phil",
+                    position: "MID",
+                    team: "MCI",
+                    price: "£8.5m",
+                    points: 158,
+                    form: 6.9,
+                    minutes: 2060,
+                    goals: 9,
+                    assists: 7,
+                    cleanSheets: 10,
+                    goalsConceded: "-",
+                    yellowCards: 3,
+                    redCards: 0,
+                    selected: "19.2%"
+                },
+                {
+                    name: "Fernandes, Bruno",
+                    position: "MID",
+                    team: "MUN",
+                    price: "£8.7m",
+                    points: 150,
+                    form: 6.2,
+                    minutes: 2322,
+                    goals: 7,
+                    assists: 8,
+                    cleanSheets: 7,
+                    goalsConceded: "-",
+                    yellowCards: 6,
+                    redCards: 0,
+                    selected: "14.1%"
+                },
+                {
+                    name: "van Dijk, Virgil",
+                    position: "DEF",
+                    team: "LIV",
+                    price: "£6.5m",
+                    points: 162,
+                    form: 6.5,
+                    minutes: 2250,
+                    goals: 5,
+                    assists: 1,
+                    cleanSheets: 12,
+                    goalsConceded: 25,
+                    yellowCards: 3,
+                    redCards: 1,
+                    selected: "16.8%"
+                },
+                {
+                    name: "Ward-Prowse, James",
+                    position: "MID",
+                    team: "WHU",
+                    price: "£6.2m",
+                    points: 135,
+                    form: 5.2,
+                    minutes: 2340,
+                    goals: 6,
+                    assists: 7,
+                    cleanSheets: 5,
+                    goalsConceded: "-",
+                    yellowCards: 3,
+                    redCards: 0,
+                    selected: "10.3%"
+                },
+                {
+                    name: "Raya, David",
+                    position: "GK",
+                    team: "ARS",
+                    price: "£5.2m",
+                    points: 140,
+                    form: 6.3,
+                    minutes: 2250,
+                    goals: 0,
+                    assists: 0,
+                    cleanSheets: 13,
+                    goalsConceded: 24,
+                    yellowCards: 2,
+                    redCards: 0,
+                    selected: "13.6%"
+                },
+                {
+                    name: "Watkins, Ollie",
+                    position: "FWD",
+                    team: "AVL",
+                    price: "£8.8m",
+                    points: 155,
+                    form: 7.2,
+                    minutes: 2175,
+                    goals: 13,
+                    assists: 9,
+                    cleanSheets: "-",
+                    goalsConceded: "-",
+                    yellowCards: 3,
+                    redCards: 0,
+                    selected: "26.4%"
+                },
+                {
+                    name: "Trossard, Leandro",
+                    position: "MID",
+                    team: "ARS",
+                    price: "£7.1m",
+                    points: 128,
+                    form: 5.8,
+                    minutes: 1845,
+                    goals: 8,
+                    assists: 5,
+                    cleanSheets: 9,
+                    goalsConceded: "-",
+                    yellowCards: 1,
+                    redCards: 0,
+                    selected: "9.2%"
+                },
+                {
+                    name: "Robertson, Andrew",
+                    position: "DEF",
+                    team: "LIV",
+                    price: "£6.4m",
+                    points: 125,
+                    form: 5.0,
+                    minutes: 1950,
+                    goals: 1,
+                    assists: 7,
+                    cleanSheets: 10,
+                    goalsConceded: 20,
+                    yellowCards: 2,
+                    redCards: 0,
+                    selected: "7.8%"
+                }
+            ],
+            // Page 3
+            [
+                {
+                    name: "Kane, Harry",
+                    position: "FWD",
+                    team: "BAY",
+                    price: "£250.0m",
+                    points: 57,
+                    form: 0,
+                    minutes: 1800,
+                    goals: 57,
+                    assists: 14,
+                    cleanSheets: "-",
+                    goalsConceded: "-",
+                    yellowCards: 4,
+                    redCards: 0,
+                    selected: "7.8%"
+                },
+                {
+                    name: "Coutinho, Philippe",
+                    position: "MID",
+                    team: "AVL",
+                    price: "£5.4m",
+                    points: 35,
+                    form: 1.2,
+                    minutes: 420,
+                    goals: 1,
+                    assists: 1,
+                    cleanSheets: 1,
+                    goalsConceded: "-",
+                    yellowCards: 1,
+                    redCards: 0,
+                    selected: "0.5%"
+                },
+                {
+                    name: "Timber, Jurrien",
+                    position: "DEF",
+                    team: "ARS",
+                    price: "£4.8m",
+                    points: 98,
+                    form: 4.2,
+                    minutes: 1680,
+                    goals: 1,
+                    assists: 3,
+                    cleanSheets: 9,
+                    goalsConceded: 16,
+                    yellowCards: 2,
+                    redCards: 0,
+                    selected: "5.1%"
+                },
+                {
+                    name: "Luis Diaz",
+                    position: "MID",
+                    team: "LIV",
+                    price: "£7.5m",
+                    points: 120,
+                    form: 5.8,
+                    minutes: 1870,
+                    goals: 8,
+                    assists: 3,
+                    cleanSheets: 8,
+                    goalsConceded: "-",
+                    yellowCards: 1,
+                    redCards: 0,
+                    selected: "8.3%"
+                },
+                {
+                    name: "Diaby, Moussa",
+                    position: "MID",
+                    team: "AVL",
+                    price: "£6.8m",
+                    points: 115,
+                    form: 5.2,
+                    minutes: 1920,
+                    goals: 7,
+                    assists: 5,
+                    cleanSheets: 6,
+                    goalsConceded: "-",
+                    yellowCards: 2,
+                    redCards: 0,
+                    selected: "6.9%"
+                },
+                {
+                    name: "Jesus, Gabriel",
+                    position: "FWD",
+                    team: "ARS",
+                    price: "£7.8m",
+                    points: 105,
+                    form: 4.8,
+                    minutes: 1750,
+                    goals: 8,
+                    assists: 6,
+                    cleanSheets: "-",
+                    goalsConceded: "-",
+                    yellowCards: 5,
+                    redCards: 0,
+                    selected: "10.2%"
+                },
+                {
+                    name: "Guimarães, Bruno",
+                    position: "MID",
+                    team: "NEW",
+                    price: "£6.2m",
+                    points: 108,
+                    form: 5.0,
+                    minutes: 2040,
+                    goals: 5,
+                    assists: 6,
+                    cleanSheets: 8,
+                    goalsConceded: "-",
+                    yellowCards: 8,
+                    redCards: 0,
+                    selected: "7.4%"
+                },
+                {
+                    name: "Gordon, Anthony",
+                    position: "MID",
+                    team: "NEW",
+                    price: "£6.9m",
+                    points: 125,
+                    form: 6.4,
+                    minutes: 1980,
+                    goals: 9,
+                    assists: 7,
+                    cleanSheets: 7,
+                    goalsConceded: "-",
+                    yellowCards: 4,
+                    redCards: 0,
+                    selected: "12.5%"
+                },
+                {
+                    name: "Rashford, Marcus",
+                    position: "MID",
+                    team: "MUN",
+                    price: "£8.2m",
+                    points: 110,
+                    form: 4.5,
+                    minutes: 1850,
+                    goals: 6,
+                    assists: 5,
+                    cleanSheets: 6,
+                    goalsConceded: "-",
+                    yellowCards: 2,
+                    redCards: 0,
+                    selected: "11.8%"
+                },
+                {
+                    name: "Mbeumo, Bryan",
+                    position: "MID",
+                    team: "BRE",
+                    price: "£6.8m",
+                    points: 118,
+                    form: 5.2,
+                    minutes: 1890,
+                    goals: 8,
+                    assists: 4,
+                    cleanSheets: 5,
+                    goalsConceded: "-",
+                    yellowCards: 3,
+                    redCards: 0,
+                    selected: "9.7%"
+                }
+            ]
+        ];
+
+        // Initialize current page and items per page
+        let currentPage = 0;
+        const totalPages = allPlayersData.length;
+
+        // Function to render player data for a given page
+        function renderPlayerData(pageIndex) {
+            const playerDataContainer = document.getElementById('player-data');
+            playerDataContainer.innerHTML = ''; // Clear existing data
+            
+            const playersOnPage = allPlayersData[pageIndex];
+            playersOnPage.forEach(player => {
+                const row = document.createElement('tr');
+                if (player.highlight) row.classList.add('highlight');
+                
+                // Get appropriate class for points
+                const pointsClass = player.points > 170 ? 'stat-high' : 
+                                   player.points > 120 ? 'stat-medium' : 'stat-low';
+                
+                row.innerHTML = `
+                    <td class="player-name">
+                      
+                        <span>${player.name}</span>
+                    </td>
+                    <td class="position-${player.position}">${player.position}</td>
+                    <td>${player.team}</td>
+                    <td>${player.price}</td>
+                    <td class="${pointsClass}">${player.points}</td>
+                    <td>${player.form}</td>
+                    <td>${player.minutes}</td>
+                    <td>${player.goals}</td>
+                    <td>${player.assists}</td>
+                    <td>${player.cleanSheets}</td>
+                    <td>${player.goalsConceded}</td>
+                    <td>${player.yellowCards}</td>
+                    <td>${player.redCards}</td>
+                    <td>${player.selected}</td>
+                `;
+                
+                playerDataContainer.appendChild(row);
+            });
+            
+            // Set up click event for row highlighting
+            const rows = document.querySelectorAll('.stats-table tbody tr');
+            rows.forEach(row => {
+                row.addEventListener('click', function() {
+                    rows.forEach(r => r.classList.remove('highlight'));
+                    this.classList.add('highlight');
+                });
+            });
+        }
+
+        // Function to update pagination buttons
+        function updatePagination() {
+            const paginationContainer = document.getElementById('pagination');
+            paginationContainer.innerHTML = '';
+            
+            // Previous button
+            const prevButton = document.createElement('button');
+            prevButton.textContent = 'Prev';
+            prevButton.disabled = currentPage === 0;
+            prevButton.addEventListener('click', () => {
+                if (currentPage > 0) {
+                    currentPage--;
+                    renderPlayerData(currentPage);
+                    updatePagination();
+                }
+            });
+            paginationContainer.appendChild(prevButton);
+            
+            // Page number buttons
+            for (let i = 0; i < totalPages; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.textContent = i + 1;
+                if (i === currentPage) {
+                    pageButton.classList.add('active');
+                }
+                pageButton.addEventListener('click', () => {
+                    currentPage = i;
+                    renderPlayerData(currentPage);
+                    updatePagination();
+                });
+                paginationContainer.appendChild(pageButton);
+            }
+            
+            // Next button
+            const nextButton = document.createElement('button');
+            nextButton.textContent = 'Next';
+            nextButton.disabled = currentPage === totalPages - 1;
+            nextButton.addEventListener('click', () => {
+                if (currentPage < totalPages - 1) {
+                    currentPage++;
+                    renderPlayerData(currentPage);
+                    updatePagination();
+                }
+            });
+            paginationContainer.appendChild(nextButton);
+        }
+
+        // Initialize the page with first page data
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPlayerData(currentPage);
+            updatePagination();
+            
+            // Handle filter button click
+            document.getElementById('apply-filters').addEventListener('click', function() {
+                alert('Filters applied! In a real implementation, this would fetch and filter player data.');
+            });
+        });
+    </script>
+</body>
+</html>

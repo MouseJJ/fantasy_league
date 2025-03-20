@@ -1,0 +1,147 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    color: #333;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+header {
+    background-color: #37003c;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+.logo {
+    height: 60px;
+    margin-bottom: 10px;
+}
+h1 {
+    margin: 0;
+    font-size: 24px;
+}
+.filters {
+    background-color: white;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+.filter-item {
+    flex-grow: 1;
+    min-width: 200px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+select, input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+button {
+    background-color: #00ff87;
+    color: #37003c;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #00e678;
+}
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    overflow: hidden;
+}
+.stats-table th, .stats-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+.stats-table th {
+    background-color: #37003c;
+    color: white;
+    position: sticky;
+    top: 0;
+}
+.stats-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.stats-table tr:hover {
+    background-color: #f1f1f1;
+}
+.player-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.team-icon {
+    width: 20px;
+    height: 20px;
+}
+.highlight {
+    background-color: #fffde7 !important;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 5px;
+}
+.pagination button {
+    background-color: white;
+    color: #37003c;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+}
+.pagination button.active {
+    background-color: #37003c;
+    color: white;
+}
+.stat-high {
+    color: #00a66c;
+    font-weight: bold;
+}
+.stat-medium {
+    color: #f59e0b;
+}
+.stat-low {
+    color: #ef4444;
+}
+.position-GK { color: #ffd700; }
+.position-DEF { color: #00a66c; }
+.position-MID { color: #3b82f6; }
+.position-FWD { color: #ef4444; }
+
+@media (max-width: 768px) {
+    .filter-item {
+        min-width: 100%;
+    }
+    .stats-table {
+        font-size: 14px;
+    }
+    .container {
+        padding: 10px;
+    }
+}

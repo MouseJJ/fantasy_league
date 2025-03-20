@@ -1,0 +1,96 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background: #1e1e2f;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Main Container */
+.container {
+    text-align: center;
+    max-width: 900px;
+    width: 100%;
+}
+
+/* Header */
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #ffcc00;
+}
+
+/* Content Layout */
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Standings Section */
+.standings, .teams {
+    background: #2a2a3a;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Standings Card */
+.card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    background: #33334d;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+.card .position {
+    font-weight: bold;
+    color: #ffcc00;
+}
+
+.card .team {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.card .points {
+    font-weight: bold;
+    color: #ff6666;
+}
+
+/* Team Card */
+.team-card {
+    background: #44445a;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+}
+
+.team-card:hover {
+    transform: scale(1.05);
+    background: #ffcc00;
+    color: #000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .content {
+        grid-template-columns: 1fr;
+    }
+}

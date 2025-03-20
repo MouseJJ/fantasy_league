@@ -1,0 +1,153 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+body {
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+.transfers-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 15px;
+}
+.budget-info {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+.transfer-sections {
+    display: flex;
+    gap: 20px;
+}
+.transfer-out, .transfer-in {
+    flex: 1;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+}
+.section-title {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #34495e;
+}
+.player-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+.player-card {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.player-card:hover {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
+.player-card.selected {
+    border-color: #3498db;
+    background-color: #e6f2ff;
+}
+.player-details {
+    margin-top: 10px;
+}
+.transfer-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.transfer-btn:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+.transfer-btn:hover:not(:disabled) {
+    background-color: #27ae60;
+}
+.player-position {
+    font-weight: bold;
+    color: #7f8c8d;
+}
+.player-value {
+    color: #2980b9;
+    font-weight: bold;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+.transfers-container {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+.player-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 10px 0;
+}
+.player-card {
+    background: #eee;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.player-card:hover {
+    transform: scale(1.05);
+    background: #d4edda;
+}
+.selected {
+    background: #007bff !important;
+    color: white;
+}
+.transfer-btn {
+    padding: 10px 20px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s;
+}
+.transfer-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}

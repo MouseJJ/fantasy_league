@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasy Premier League - Leagues</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="Leaguess.js"></script>
+    <script defer>
+        async function displayLeagueData() {
+            const leagueId = 'PL'; // Premier League ID
+            const standingsContainer = document.getElementById('standings');
+            const teamsContainer = document.getElementById('teams');
+            
+            const standings = await getLeagueStandings(leagueId);
+            const teams = await getLeagueTeams(leagueId);
+            
+            if (standings && standings.standings) {
+                standingsContainer.innerHTML = `<h2>${standings.competition.name} Standings</h2>`;
+                standings.standings[0].table.forEach(team => {
+                    standingsContainer.innerHTML += `
+                        <div class="card">
+                            <span class="position">${team.position}</span>
+                            <span class="team">${team.team.name}</span>
+                            <span class="points">${team.points} pts</span>
+                        </div>`;
+                });
+            }
+            
+            if (teams) {
+                teamsContainer.innerHTML = '<h2>Teams</h2>';
+                teams.forEach(team => {
+                    teamsContainer.innerHTML += `<div class="team-card">${team.name}</div>`;
+                });
+            }
+        }
+        
+        window.onload = displayLeagueData;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Fantasy Premier League - Leagues</h1>
+        <div class="content">
+            <div id="standings" class="standings"></div>
+        </div>
+    </div>
+</body>
+</html>

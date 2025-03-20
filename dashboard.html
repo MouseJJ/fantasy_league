@@ -4,267 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fantasy Premier League</title>
-    <style>
-        /* CSS Styles */
-        :root {
-            --primary: #37003c;
-            --secondary: #00ff87;
-            --light: #ffffff;
-            --dark: #242424;
-            --gray: #f0f0f0;
-            --border: #e0e0e0;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--gray);
-            color: var(--dark);
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        header {
-            background-color: var(--primary);
-            color: var(--light);
-            padding: 15px 0;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo h1 {
-            font-size: 24px;
-            margin-left: 10px;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 20px;
-        }
-        
-        nav ul li a {
-            color: var(--light);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        nav ul li a:hover {
-            color: var(--secondary);
-        }
-        
-        .user-info {
-            display: flex;
-            align-items: center;
-        }
-        
-        .user-info img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-        
-        .main-content {
-            padding: 30px 0;
-        }
-        
-        .dashboard {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        @media (max-width: 768px) {
-            .dashboard {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .card {
-            background-color: var(--light);
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .card-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--primary);
-        }
-        
-        .team-section {
-            background-color: var(--light);
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .pitch {
-            background-color: #56ab56;
-            border-radius: 8px;
-            padding: 20px;
-            display: grid;
-            grid-template-rows: repeat(4, 1fr);
-            gap: 10px;
-            height: 400px;
-        }
-        
-        .pitch-row {
-            display: flex;
-            justify-content: space-around;
-        }
-        
-        .player {
-            background-color: rgba(255, 255, 255, 0.7);
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        
-        .player:hover {
-            transform: scale(1.1);
-        }
-        
-        .player img {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            margin-bottom: 5px;
-        }
-        
-        .stats-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        .stats-table th, .stats-table td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .stats-table th {
-            font-weight: 600;
-            color: var(--primary);
-        }
-        
-        .btn {
-            padding: 10px 15px;
-            border-radius: 4px;
-            font-weight: 500;
-            cursor: pointer;
-            border: none;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        
-        .btn-primary {
-            background-color: var(--primary);
-            color: var(--light);
-        }
-        
-        .btn-primary:hover {
-            background-color: #29002e;
-        }
-        
-        .btn-secondary {
-            background-color: var(--secondary);
-            color: var(--primary);
-        }
-        
-        .btn-secondary:hover {
-            background-color: #00cc6d;
-        }
-        
-        .tabs {
-            display: flex;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 20px;
-        }
-        
-        .tab {
-            padding: 10px 20px;
-            cursor: pointer;
-            font-weight: 500;
-        }
-        
-        .tab.active {
-            color: var(--primary);
-            border-bottom: 3px solid var(--primary);
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        .points-history {
-            height: 200px;
-        }
-        
-        footer {
-            background-color: var(--primary);
-            color: var(--light);
-            padding: 20px 0;
-            text-align: center;
-            margin-top: 40px;
-        }
-        .auth-buttons {
-    margin-left: auto; /* Pushes the buttons to the right */
-    display: flex;
-    gap: 10px;
-}
-
-.auth-buttons .btn {
-    padding: 8px 15px;
-    font-size: 14px;
-}
-
-    </style>
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
     <header>
@@ -275,15 +15,16 @@
             <nav>
                 <ul>
                     <li><a href="#" class="active">Home</a></li>
-                    <li><a href="#">Transfers</a></li>
-                    <li><a href="#">Points</a></li>
-                    <li><a href="#">Leagues</a></li>
+                    <li><a href="transfers.html">Transfers</a></li>
+                    <li><a href="statistics.html">Player Statistics</a></li>
+                    <li><a href="league.html">Leagues</a></li>
+                    <li><a href="Myleague.html">My leagues</a> </li>
                     <li><a href="#">Stats</a></li>
                 </ul>
             </nav>
             <div class="auth-buttons">
-                <button class="btn btn-primary" ><a href="Login.html">login</a></button>
-                <button class="btn btn-secondary"><a href="Login.html">Signup</a> </button>
+                <a href="Login.html" class="btn btn-primary">login</a>
+                <a href="Login.html" class="btn btn-secondary">Signup</a>
             </div>
             
         </div>
@@ -339,54 +80,54 @@
                 <div class="pitch">
                     <div class="pitch-row">
                         <div class="player">
-                            <img src="/api/placeholder/30/30" alt="Player">
+                            <img src="https://i.pinimg.com/236x/83/33/88/83338861ce69d86bd85f88a8950f79d3.jpg" alt="Player">
                             <span>Alisson</span>
                         </div>
                     </div>
                     <div class="pitch-row">
                         <div class="player">
-                            <img src="/api/placeholder/30/30" alt="Player">
-                            <span>TAA</span>
+                            <img src="https://i.pinimg.com/236x/b4/17/5f/b4175f2ff78b7426d9838b4f4bf36e2b.jpg" alt="Player">
+                            <span>Walker</span>
                         </div>
                         <div class="player">
-                            <img src="/api/placeholder/30/30" alt="Player">
+                            <img src="https://i.pinimg.com/474x/70/cb/f4/70cbf4e1c6075e78af237ac6386fbc36.jpg" alt="Player">
                             <span>Van Dijk</span>
                         </div>
                         <div class="player">
-                            <img src="/api/placeholder/30/30" alt="Player">
-                            <span>Dias</span>
+                            <img src="https://i.pinimg.com/474x/de/65/d2/de65d28dd0049bfb3fec411963d2409b.jpg" alt="Player">
+                            <span>Konate</span>
                         </div>
                         <div class="player">
-                            <img src="/api/placeholder/30/30" alt="Player">
+                            <img src="https://i.pinimg.com/474x/1d/76/85/1d7685c4150174b93dd3463c42bb1754.jpg" alt="Player">
                             <span>James</span>
                         </div>
                     </div>
                     <div class="pitch-row">
                         <div class="player">
-                            <img src="/api/placeholder/30/30" alt="Player">
+                            <img src="https://i.pinimg.com/736x/e1/a8/a8/e1a8a87836971c5d70cbfe2f0a8e00dc.jpg" alt="Player">
                             <span>Salah</span>
                         </div>
                         <div class="player">
-                            <img src="/api/placeholder/30/30" alt="Player">
+                            <img src="https://i.pinimg.com/474x/a2/12/20/a212206aff05d6b65103cc57f7502124.jpg" alt="Player">
                             <span>KDB</span>
                         </div>
                         <div class="player">
-                            <img src="/api/placeholder/30/30" alt="Player">
-                            <span>Saka</span>
+                            <img src="https://i.pinimg.com/736x/5a/f9/17/5af917bdb96f479ffc11db86a109ead4.jpg" alt="Player">
+                            <span>Ronaldo</span>
                         </div>
                         <div class="player">
-                            <img src="/api/placeholder/30/30" alt="Player">
-                            <span>Mount</span>
+                            <img src="https://i.pinimg.com/736x/a7/13/43/a713435a8fb8447780ebd105dbb67162.jpg" alt="Player">
+                            <span>Son</span>
                         </div>
                     </div>
                     <div class="pitch-row">
                         <div class="player">
-                            <img src="/api/placeholder/30/30" alt="Player">
+                            <img src="https://i.pinimg.com/736x/1a/ef/d7/1aefd7ae6ea5889e3e9f53609809ec71.jpg" alt="Player">
                             <span>Haaland</span>
                         </div>
                         <div class="player">
-                            <img src="/api/placeholder/30/30" alt="Player">
-                            <span>Kane</span>
+                            <img src="https://i.pinimg.com/736x/37/b7/56/37b756b01219c9064f46fa07c4fb82c0.jpg" alt="Player">
+                            <span>Neymar jr</span>
                         </div>
                     </div>
                 </div>
@@ -625,5 +366,6 @@
             window.location.href = "signup.html"; // Redirect to signup page
         }
     </script>
+    <script src="transfers.js"></script>
 </body>
 </html>

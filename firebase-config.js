@@ -7,7 +7,7 @@ import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com
     apiKey: "AIzaSyB96ev-OgmcaFQqi8KPWOCPzIQevCx7KRY",
     authDomain: "fantasy-league-31c45.firebaseapp.com",
     projectId: "fantasy-league-31c45",
-    storageBucket: "fantasy-league-31c45.appspot.com", // 🔹 Fixed the storageBucket URL
+    storageBucket: "fantasy-league-31c45.appspot.com", 
     messagingSenderId: "490090007262",
     appId: "1:490090007262:web:bb8076d6c8f32b364f504f",
     measurementId: "G-QP1EJ07V7M"
