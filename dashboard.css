@@ -206,7 +206,7 @@ nav ul li a:hover {
 }
 
 .btn-secondary:hover {
-    background-color: #00cc6d;
+    background-color: #df9f28;
 }
 
 .tabs {
@@ -254,4 +254,26 @@ gap: 10px;
 .auth-buttons .btn {
 padding: 8px 15px;
 font-size: 14px;
+}
+.pitch {
+    display: grid;
+    grid-template-rows: repeat(4, auto);
+    gap: 10px;
+    padding: 20px;
+    background-color: hsl(145, 85%, 52%);
+    border-radius: 10px;
+    position: relative;
+}
+
+.goalkeeper, .defenders, .midfielders, .forwards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.player {
+    text-align: center;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
 }
