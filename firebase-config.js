@@ -1,8 +1,9 @@
 
 // Import Firebase libraries
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-  // ✅ Firebase Configuration
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"; 
+// ✅ Firebase Configuration
   const firebaseConfig = {
     apiKey: "AIzaSyB96ev-OgmcaFQqi8KPWOCPzIQevCx7KRY",
     authDomain: "fantasy-league-31c45.firebaseapp.com",
@@ -17,6 +18,15 @@ import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com
 const app = initializeApp(firebaseConfig);
 // ✅ Initialize Authentication
 const auth = getAuth(app);
+
+const db = getFirestore(app)
+
+// Export for other modules
+export { auth, db, createUserWithEmailAndPassword };
+export {  collection, getDocs };
+
+
+
 function signup() {
     const email = document.getElementById('signup-email').value;
     const password = document.getElementById('signup-password').value;
@@ -30,3 +40,6 @@ function signup() {
             alert(error.message); 
         });
 }
+
+
+

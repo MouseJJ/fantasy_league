@@ -5,11 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fantasy Premier League - Transfers</title>
     <link rel="stylesheet" href="transfers.css"/>
-    <style>
-       
-    </style>
+    <link rel="stylesheet" href="dashboard.css"/>
 </head>
 <body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <h1>Fantasy Premier League</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                    <li><a href="transfers.html">Transfers</a></li>
+                    <li><a href="statistics.html">Player Statistics</a></li>
+                    <li><a href="league.html">Leagues</a></li>
+                    <li><a href="Myleague.html">My leagues</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="Login.html" class="btn btn-primary login-btn">Login</a>
+                <a href="Signup.html" class="btn btn-secondary signup-btn">Signup</a>
+                
+            </div>
+            <button id="logout-btn" class="btn btn-danger" style="display: none;">Logout</button>
+        </div>
+    </header>
     <div class="transfers-container">
         <div class="header">
             <h1>Transfer Market</h1>
@@ -35,93 +55,6 @@
         </button>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            let budget = 100.5;
-            const budgetInfo = document.getElementById('budgetInfo');
-            
-            let teamPlayers = [
-                { id: 1, name: "Mohamed Salah", position: "Forward", club: "Liverpool", value: 12.5 },
-                { id: 2, name: "Kevin De Bruyne", position: "Midfielder", club: "Man City", value: 11.8 },
-                { id: 3, name: "Virgil van Dijk", position: "Defender", club: "Liverpool", value: 6.5 },
-                { id: 6, name: "Son ", postition: "Forward", club: "Tottenham", value: 12.0},
-                { id: 7, name: "Alisson Becker", position: "Goalkeeper", club: "liverpool", value: 6.0},
-                { id: 8, name: "Walker", position: "Right Back", club: "Manchester city", value: 6.2},
-                { id: 9, name: "Reece James", position: "Rightback", club: "chelsea", value: 7.5},
-                { id: 10, name: "Mohammed Salah", position: "Left Wing ", club: "Liverpool", value: 12.5}
-
-            ];
-            
-            let availablePlayers = [
-                { id: 4, name: "Erling Haaland", position: "Forward", club: "Man City", value: 14.0 },
-                { id: 5, name: "Bruno Fernandes", position: "Midfielder", club: "Man United", value: 10.5 }
-            ];
-            
-            const teamPlayersList = document.getElementById('teamPlayersList');
-            const availablePlayersList = document.getElementById('availablePlayersList');
-            const transferButton = document.getElementById('transferButton');
-            
-            function renderPlayers(container, players) {
-                container.innerHTML = '';
-                players.forEach(player => {
-                    const playerCard = document.createElement('div');
-                    playerCard.classList.add('player-card');
-                    playerCard.dataset.playerId = player.id;
-                    playerCard.innerHTML = `<h3>${player.name}</h3><p>${player.position}</p><p>${player.club}</p><p class='player-value'>£${player.value}m</p>`;
-                    container.appendChild(playerCard);
-                });
-            }
-            
-            renderPlayers(teamPlayersList, teamPlayers);
-            renderPlayers(availablePlayersList, availablePlayers);
-            
-            let selectedOutPlayer = null;
-            let selectedInPlayer = null;
-            
-            teamPlayersList.addEventListener('click', (e) => {
-                const playerCard = e.target.closest('.player-card');
-                if (playerCard) {
-                    document.querySelectorAll('.player-card').forEach(card => card.classList.remove('selected'));
-                    playerCard.classList.add('selected');
-                    selectedOutPlayer = teamPlayers.find(player => player.id == playerCard.dataset.playerId);
-                    checkTransferValidity();
-                }
-            });
-            
-            availablePlayersList.addEventListener('click', (e) => {
-                const playerCard = e.target.closest('.player-card');
-                if (playerCard) {
-                    document.querySelectorAll('.player-card').forEach(card => card.classList.remove('selected'));
-                    playerCard.classList.add('selected');
-                    selectedInPlayer = availablePlayers.find(player => player.id == playerCard.dataset.playerId);
-                    checkTransferValidity();
-                }
-            });
-            
-            function checkTransferValidity() {
-                transferButton.disabled = !(selectedOutPlayer && selectedInPlayer && (budget + selectedOutPlayer.value >= selectedInPlayer.value));
-            }
-            
-            transferButton.addEventListener('click', () => {
-                if (selectedOutPlayer && selectedInPlayer) {
-                    budget = budget + selectedOutPlayer.value - selectedInPlayer.value;
-                    budgetInfo.innerHTML = `Budget Remaining: <strong>£${budget.toFixed(1)}m</strong>`;
-                    
-                    teamPlayers = teamPlayers.filter(player => player.id !== selectedOutPlayer.id);
-                    availablePlayers = availablePlayers.filter(player => player.id !== selectedInPlayer.id);
-                    
-                    teamPlayers.push(selectedInPlayer);
-                    availablePlayers.push(selectedOutPlayer);
-                    
-                    renderPlayers(teamPlayersList, teamPlayers);
-                    renderPlayers(availablePlayersList, availablePlayers);
-                    
-                    selectedOutPlayer = null;
-                    selectedInPlayer = null;
-                    transferButton.disabled = true;
-                }
-            });
-        });
-    </script>
+    <script type="module" src="transfers.js"></script>
 </body>
 </html>

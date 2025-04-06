@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fantasy Premier League</title>
     <link rel="stylesheet" href="dashboard.css">
+
+    <script src="dashboard.js" type="module"></script>
+
 </head>
 <body>
     <header>
@@ -18,15 +21,15 @@
                     <li><a href="transfers.html">Transfers</a></li>
                     <li><a href="statistics.html">Player Statistics</a></li>
                     <li><a href="league.html">Leagues</a></li>
-                    <li><a href="Myleague.html">My leagues</a> </li>
-                    <li><a href="#">Stats</a></li>
+                    <li><a href="Myleague.html">My leagues</a></li>
                 </ul>
             </nav>
             <div class="auth-buttons">
-                <a href="Login.html" class="btn btn-primary">login</a>
-                <a href="Login.html" class="btn btn-secondary">Signup</a>
+                <a href="Login.html" class="btn btn-primary login-btn">Login</a>
+                <a href="Signup.html" class="btn btn-secondary signup-btn">Signup</a>
+                
             </div>
-            
+            <button id="logout-btn" class="btn btn-danger" style="display: none;">Logout</button>
         </div>
     </header>
 
@@ -35,246 +38,12 @@
             <div class="dashboard">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="card-title">Team Overview</h2>
                     </div>
-                    <div class="card-content">
-                        <p><strong>Team Value:</strong> £102.5m</p>
-                        <p><strong>In Bank:</strong> £0.5m</p>
-                        <p><strong>Gameweek Points:</strong> 65</p>
-                        <p><strong>Total Points:</strong> 1,245</p>
-                        <p><strong>Overall Rank:</strong> 125,432</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Upcoming Fixtures</h2>
-                    </div>
-                    <div class="card-content">
-                        <p><strong>Gameweek 26</strong></p>
-                        <p>Arsenal vs Liverpool</p>
-                        <p>Man City vs Tottenham</p>
-                        <p>Chelsea vs Man United</p>
-                        <p>Newcastle vs Aston Villa</p>
-                        <p><a href="#">View all fixtures</a></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Deadlines</h2>
-                    </div>
-                    <div class="card-content">
-                        <p><strong>Next Deadline:</strong></p>
-                        <p>Gameweek 26: 11:00 AM, Saturday</p>
-                        <p><strong>Free Transfers:</strong> 1</p>
-                        <p><strong>Wildcards:</strong> Available</p>
-                        <p><strong>Triple Captain:</strong> Available</p>
-                    </div>
-                </div>
-            </div>
-
             <div class="team-section">
                 <div class="card-header">
                     <h2 class="card-title">My Team</h2>
-                    <button class="btn btn-primary">Make Transfers</button>
                 </div>
                 <div class="pitch">
-                    <div class="pitch-row">
-                        <div class="player">
-                            <img src="https://i.pinimg.com/236x/83/33/88/83338861ce69d86bd85f88a8950f79d3.jpg" alt="Player">
-                            <span>Alisson</span>
-                        </div>
-                    </div>
-                    <div class="pitch-row">
-                        <div class="player">
-                            <img src="https://i.pinimg.com/236x/b4/17/5f/b4175f2ff78b7426d9838b4f4bf36e2b.jpg" alt="Player">
-                            <span>Walker</span>
-                        </div>
-                        <div class="player">
-                            <img src="https://i.pinimg.com/474x/70/cb/f4/70cbf4e1c6075e78af237ac6386fbc36.jpg" alt="Player">
-                            <span>Van Dijk</span>
-                        </div>
-                        <div class="player">
-                            <img src="https://i.pinimg.com/474x/de/65/d2/de65d28dd0049bfb3fec411963d2409b.jpg" alt="Player">
-                            <span>Konate</span>
-                        </div>
-                        <div class="player">
-                            <img src="https://i.pinimg.com/474x/1d/76/85/1d7685c4150174b93dd3463c42bb1754.jpg" alt="Player">
-                            <span>James</span>
-                        </div>
-                    </div>
-                    <div class="pitch-row">
-                        <div class="player">
-                            <img src="https://i.pinimg.com/736x/e1/a8/a8/e1a8a87836971c5d70cbfe2f0a8e00dc.jpg" alt="Player">
-                            <span>Salah</span>
-                        </div>
-                        <div class="player">
-                            <img src="https://i.pinimg.com/474x/a2/12/20/a212206aff05d6b65103cc57f7502124.jpg" alt="Player">
-                            <span>KDB</span>
-                        </div>
-                        <div class="player">
-                            <img src="https://i.pinimg.com/736x/5a/f9/17/5af917bdb96f479ffc11db86a109ead4.jpg" alt="Player">
-                            <span>Ronaldo</span>
-                        </div>
-                        <div class="player">
-                            <img src="https://i.pinimg.com/736x/a7/13/43/a713435a8fb8447780ebd105dbb67162.jpg" alt="Player">
-                            <span>Son</span>
-                        </div>
-                    </div>
-                    <div class="pitch-row">
-                        <div class="player">
-                            <img src="https://i.pinimg.com/736x/1a/ef/d7/1aefd7ae6ea5889e3e9f53609809ec71.jpg" alt="Player">
-                            <span>Haaland</span>
-                        </div>
-                        <div class="player">
-                            <img src="https://i.pinimg.com/736x/37/b7/56/37b756b01219c9064f46fa07c4fb82c0.jpg" alt="Player">
-                            <span>Neymar jr</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-header" style="margin-top: 20px;">
-                    <h3>Substitutes</h3>
-                </div>
-                <table class="stats-table">
-                    <tr>
-                        <td>GK</td>
-                        <td>Pope</td>
-                        <td>Newcastle</td>
-                        <td>£5.0m</td>
-                    </tr>
-                    <tr>
-                        <td>DEF</td>
-                        <td>Trippier</td>
-                        <td>Newcastle</td>
-                        <td>£6.0m</td>
-                    </tr>
-                    <tr>
-                        <td>MID</td>
-                        <td>Foden</td>
-                        <td>Man City</td>
-                        <td>£8.5m</td>
-                    </tr>
-                    <tr>
-                        <td>FWD</td>
-                        <td>Toney</td>
-                        <td>Brentford</td>
-                        <td>£7.0m</td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="card">
-                <div class="tabs">
-                    <div class="tab active" data-tab="leagues">My Leagues</div>
-                    <div class="tab" data-tab="history">Points History</div>
-                    <div class="tab" data-tab="transfers">Transfer History</div>
-                </div>
-                
-                <div class="tab-content active" id="leagues">
-                    <table class="stats-table">
-                        <thead>
-                            <tr>
-                                <th>League Name</th>
-                                <th>Position</th>
-                                <th>Total Teams</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Overall</td>
-                                <td>125,432</td>
-                                <td>10,000,000</td>
-                            </tr>
-                            <tr>
-                                <td>Friends League</td>
-                                <td>1</td>
-                                <td>12</td>
-                            </tr>
-                            <tr>
-                                <td>Work League</td>
-                                <td>3</td>
-                                <td>25</td>
-                            </tr>
-                            <tr>
-                                <td>Country League</td>
-                                <td>5,432</td>
-                                <td>500,000</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="tab-content" id="history">
-                    <div class="points-history">
-                        <!-- Points history graph would go here - using JavaScript charts -->
-                        <p style="text-align: center; margin-top: 80px;">Points History Graph</p>
-                    </div>
-                    <table class="stats-table">
-                        <thead>
-                            <tr>
-                                <th>Gameweek</th>
-                                <th>Points</th>
-                                <th>Average</th>
-                                <th>Highest</th>
-                                <th>Rank</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>GW25</td>
-                                <td>65</td>
-                                <td>52</td>
-                                <td>125</td>
-                                <td>125,432</td>
-                            </tr>
-                            <tr>
-                                <td>GW24</td>
-                                <td>78</td>
-                                <td>49</td>
-                                <td>132</td>
-                                <td>98,765</td>
-                            </tr>
-                            <tr>
-                                <td>GW23</td>
-                                <td>45</td>
-                                <td>42</td>
-                                <td>118</td>
-                                <td>234,567</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="tab-content" id="transfers">
-                    <table class="stats-table">
-                        <thead>
-                            <tr>
-                                <th>Gameweek</th>
-                                <th>Player Out</th>
-                                <th>Player In</th>
-                                <th>Cost</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>GW25</td>
-                                <td>Son (TOT)</td>
-                                <td>Salah (LIV)</td>
-                                <td>£0.5m</td>
-                            </tr>
-                            <tr>
-                                <td>GW24</td>
-                                <td>Vardy (LEI)</td>
-                                <td>Haaland (MCI)</td>
-                                <td>£1.2m</td>
-                            </tr>
-                            <tr>
-                                <td>GW22</td>
-                                <td>Chilwell (CHE)</td>
-                                <td>James (CHE)</td>
-                                <td>£0.3m</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
@@ -287,76 +56,31 @@
     </footer>
 
     <script>
-        // JavaScript functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Tab switching functionality
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    // Remove active class from all tabs and content
-                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                    
-                    // Add active class to clicked tab
-                    this.classList.add('active');
-                    
-                    // Show corresponding content
-                    const tabId = this.getAttribute('data-tab');
-                    document.getElementById(tabId).classList.add('active');
-                });
-            });
-            
-            // Player selection functionality
-            const players = document.querySelectorAll('.player');
-            players.forEach(player => {
-                player.addEventListener('click', function() {
-                    // Show player stats or options
-                    showPlayerDetails(this);
-                });
-            });
-            
-            // Function to simulate API call for player details
-            function showPlayerDetails(playerElement) {
-                const playerName = playerElement.querySelector('span').textContent;
-                alert(`Player details for ${playerName} would show in a modal here`);
-                // In a real application, this would fetch data from PHP backend and display in a modal
-            }
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log("Fantasy Premier League loaded successfully.");
         });
-        
-        // Function to load player data from server (would be used in a real app)
-        function loadPlayerData() {
-            fetch('get_player_data.php')
-                .then(response => response.json())
-                .then(data => {
-                    // Update player information
-                    console.log('Player data loaded', data);
-                })
-                .catch(error => console.error('Error loading player data:', error));
+
+        function goToLogin() {
+            window.location.href = "login.html";
         }
-        
-        // Function to make transfers (would be used in a real app)
-        function makeTransfer(playerId, newPlayerId) {
-            fetch('make_transfer.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    playerOut: playerId,
-                    playerIn: newPlayerId
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Transfer successful!');
-                    // Update UI
-                } else {
-                    alert('Transfer failed: ' + data.message);
-                }
-            })
-            .catch(error => console.error('Error making transfer:', error));
+
+        function goToSignup() {
+            window.location.href = "signup.html";
         }
+    </script>
+
+</body>
+</html>
+
+
+    <script>
+        // JavaScript functionality
+            
+            
+            
+            
+        
+        
 
         function goToLogin() {
             window.location.href = "login.html"; // Redirect to login page
@@ -366,6 +90,6 @@
             window.location.href = "signup.html"; // Redirect to signup page
         }
     </script>
-    <script src="transfers.js"></script>
+
 </body>
 </html>

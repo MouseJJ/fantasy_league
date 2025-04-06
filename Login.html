@@ -22,11 +22,6 @@
         <input type="email" id="signup-email" placeholder="Email" required>
         <input type="password" id="signup-password" placeholder="Password" required>
         <button class="btn btn-primary" onclick="signup()">Sign Up</button>
-    
-        <p>Or sign up with:</p>
-        <button class="btn btn-google" onclick="signInWithGoogle()">Sign Up with Google</button>
-        <button class="btn btn-facebook" onclick="signInWithFacebook()">Sign Up with Facebook</button>
-    
         <span class="toggle-link" onclick="toggleForms()">Already have an account? Login</span>
     </div>
     
@@ -61,31 +56,6 @@
         };
 import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-// 🔥 Google Sign-in
-window.signInWithGoogle = function () {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-        .then((result) => {
-            alert("Signed in as " + result.user.displayName);
-        })
-        .catch((error) => {
-            alert(error.message);
-        });
-};
-
-// 🔥 Facebook Sign-in
-window.signInWithFacebook = function () {
-    const provider = new FacebookAuthProvider();
-    signInWithPopup(auth, provider)
-        .then((result) => {
-            alert("Signed in as " + result.user.displayName);
-        })
-        .catch((error) => {
-            alert(error.message);
-        });
-};
-
-
 window.signup = function () {
     const name = document.getElementById('signup-name').value.trim();
     const email = document.getElementById('signup-email').value.trim();
@@ -100,18 +70,17 @@ window.signup = function () {
         .then((userCredential) => {
             let user = userCredential.user;
             alert('Signup successful! Redirecting...');
-
-            // ✅ Update user profile with name
             return updateProfile(user, { displayName: name });
         })
         .then(() => {
             console.log('User profile updated');
-            // ✅ Redirect user to dashboard or homepage
-            window.location.href = "dashboard.html"; // Change this to your actual page
+        
+            window.location.href = "dashboard.html";
         })
         .catch(error => {
             alert("Error: " + error.message);
         });
+    
 };
 
 window.login = function () {
@@ -125,9 +94,8 @@ window.login = function () {
 
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            alert('Login successful! Redirecting...');
-            // ✅ Redirect user to the dashboard/homepage
-            window.location.href = "dashboard.html"; // Change this to your actual page
+    
+            window.location.href = "dashboard.html";
         })
         .catch(error => {
             alert(error.message);

@@ -1,12 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fantasy Premier League - Player Statistics</title>
-    <style>
-        
-    </style>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <h1>Fantasy Premier League</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                    <li><a href="transfers.html">Transfers</a></li>
+                    <li><a href="statistics.html">Player Statistics</a></li>
+                    <li><a href="league.html">Leagues</a></li>
+                    <li><a href="Myleague.html">My leagues</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="Login.html" class="btn btn-primary login-btn">Login</a>
+                <a href="Signup.html" class="btn btn-secondary signup-btn">Signup</a>
+                
+            </div>
+            <button id="logout-btn" class="btn btn-danger" style="display: none;">Logout</button>
+        </div>
+    </header>
     <link rel="stylesheet" href="statistics.css"/>
 </head>
 <body>
@@ -18,73 +39,6 @@
     </header>
     
     <div class="container">
-        <div class="filters">
-            <div class="filter-row">
-                <div class="filter-item">
-                    <label for="search">Search Player</label>
-                    <input type="text" id="search" placeholder="Player name...">
-                </div>
-                <div class="filter-item">
-                    <label for="team">Team</label>
-                    <select id="team">
-                        <option value="">All Teams</option>
-                        <option value="ARS">Arsenal</option>
-                        <option value="AVL">Aston Villa</option>
-                        <option value="BOU">Bournemouth</option>
-                        <option value="BRE">Brentford</option>
-                        <option value="BHA">Brighton</option>
-                        <option value="CHE">Chelsea</option>
-                        <option value="CRY">Crystal Palace</option>
-                        <option value="EVE">Everton</option>
-                        <option value="FUL">Fulham</option>
-                        <option value="LIV">Liverpool</option>
-                        <option value="MCI">Manchester City</option>
-                        <option value="MUN">Manchester United</option>
-                        <option value="NEW">Newcastle</option>
-                        <option value="NFO">Nottingham Forest</option>
-                        <option value="SOU">Southampton</option>
-                        <option value="TOT">Tottenham</option>
-                        <option value="WHU">West Ham</option>
-                        <option value="WOL">Wolves</option>
-                        <option value="LEI">Leicester</option>
-                    </select>
-                </div>
-                <div class="filter-item">
-                    <label for="position">Position</label>
-                    <select id="position">
-                        <option value="">All Positions</option>
-                        <option value="GK">Goalkeeper</option>
-                        <option value="DEF">Defender</option>
-                        <option value="MID">Midfielder</option>
-                        <option value="FWD">Forward</option>
-                    </select>
-                </div>
-            </div>
-            <div class="filter-row">
-                <div class="filter-item">
-                    <label for="price">Max Price</label>
-                    <input type="range" id="price" min="40" max="150" value="150" 
-                           oninput="document.getElementById('priceValue').textContent = (this.value/10).toFixed(1)">
-                    <span id="priceValue">15.0</span>m
-                </div>
-                <div class="filter-item">
-                    <label for="sort">Sort By</label>
-                    <select id="sort">
-                        <option value="points">Total Points</option>
-                        <option value="form">Form</option>
-                        <option value="price">Price</option>
-                        <option value="selected">Selection %</option>
-                        <option value="minutes">Minutes Played</option>
-                        <option value="goals">Goals</option>
-                        <option value="assists">Assists</option>
-                    </select>
-                </div>
-                <div class="filter-item">
-                    <label>&nbsp;</label>
-                    <button id="apply-filters">Apply Filters</button>
-                </div>
-            </div>
-        </div>
         
         <table class="stats-table">
             <thead>
