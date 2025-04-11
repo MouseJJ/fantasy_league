@@ -19,19 +19,20 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             console.log("❌ No user logged in.");
 
-    
+            // Show login/signup, hide logout
             if (authButtons) authButtons.style.display = "block";
             if (logoutBtn) logoutBtn.style.display = "none";
         }
     });
 
-
+    // Logout functionality
     if (logoutBtn) {
         logoutBtn.addEventListener("click", async () => {
             try {
                 await signOut(auth);
                 console.log("👋 Logged out successfully!");
                 window.location.href = "login.html";
+                window.location.href = "login.html"; // Redirect to login page
             } catch (error) {
                 console.error("❌ Logout failed:", error);
             }
@@ -39,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// ✅ Fetch and display the user's team from Firestore
 async function loadTeam(userId) {
     const pitch = document.querySelector(".pitch");
     if (!pitch) return console.error("❌ Pitch container not found!");
@@ -56,10 +58,10 @@ async function loadTeam(userId) {
         const teamData = teamSnap.data();
         const players = teamData.players || [];
 
-    
+        // Clear existing players
         pitch.innerHTML = "";
 
-    
+        // Position mapping
         const positions = {
             "Goalkeeper": [],
             "Defender": [],
@@ -67,14 +69,14 @@ async function loadTeam(userId) {
             "Forward": []
         };
 
-    
+        // Sort players into positions
         players.forEach(player => {
             if (positions[player.position]) {
                 positions[player.position].push(player);
             }
         });
 
-    
+        // Render players in respective positions
         pitch.innerHTML = `
             <div class="goalkeeper">${createPlayerHTML(positions.Goalkeeper)}</div>
             <div class="defenders">${createPlayerHTML(positions.Defender)}</div>
@@ -89,7 +91,7 @@ async function loadTeam(userId) {
     }
 }
 
-
+// 🎨 Helper function to generate player HTML
 function createPlayerHTML(players) {
     return players.map(player => `
         <div class="player">
