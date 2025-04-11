@@ -3,7 +3,8 @@ const fetch = require('node-fetch');
 const cors = require('cors');
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
+
 const API_KEY = '169792c846364b6d9b526baea16c2a9c';  
 const BASE_URL = 'https://api.football-data.org/v4';
 
@@ -37,4 +38,6 @@ app.get('/teams', async (req, res) => {
     res.json(data);
 });
 
-app.listen(PORT, () => console.log(`✅ Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
